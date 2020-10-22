@@ -1,5 +1,5 @@
 #! /bin/sh
-
+#Default Config
 # CatFetch, based on mfetch by depsterr: https://github.com/depsterr/mfetch
 
 #####################
