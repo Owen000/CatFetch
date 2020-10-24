@@ -1,3 +1,27 @@
+#Term stolen from fet.sh
+
+while [ ! "$term" ]; do
+	while IFS=':	' read -r key val; do
+		case $key in
+			PPid) ppid=$val; break;;
+		esac
+	done < "/proc/${ppid:-$PPID}/status"
+
+	read -r name < "/proc/$ppid/comm"
+	case $name in
+		*sh) ;;
+		"${0##*/}") ;;
+		*[Ll]ogin*|*init*) term=linux;;
+		*) term="$name";;
+	esac
+done
+
+#Most of this stolen from gfetch by javacraft07
+
+#Kernel
+kernel="$(uname -sr | sed 's/-.*//')"
+
+#uptime"$(uptime -p | sed 's/up //')"
 
 # Get user
 user="${USER-$(id -u -n)}"
